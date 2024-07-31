@@ -167,15 +167,12 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # CORS
-
 CORS_ALLOWED_ORIGINS = [
-    "https://wdawda.azurewebsites.net",
     "https://django-jobai-0722-7kowvvrmxa-de.a.run.app",
-    "http://127.0.0.1:8000"
+    "http://127.0.0.1:8000",
 ]
 
 # CSRF TRUSTED_ORIGINS
 CSRF_TRUSTED_ORIGINS = [
-    "https://wdawda.azurewebsites.net",
     "https://django-jobai-0722-7kowvvrmxa-de.a.run.app",
 ]

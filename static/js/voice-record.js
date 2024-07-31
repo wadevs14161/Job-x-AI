@@ -81,9 +81,9 @@ function uploadBlob(blob) {
 		.querySelector('meta[name="csrf-token"]')
 		.getAttribute("content");
 
-	// Send the blob to the django server with url /transcribe (same origin)
-	// url = 'http://127.0.0.1:5000/transcribe';
-	url = 'https://wda-gemini-api.azurewebsites.net/transcribe';
+
+	url = 'https://job-api-7kowvvrmxa-de.a.run.app/transcribe';
+	// url = 'https://wda-gemini-api.azurewebsites.net/transcribe';
 
 	console.log(url)
 
@@ -92,9 +92,12 @@ function uploadBlob(blob) {
 		type: 'POST',
 		data: formData,
 		headers: {
-			"X-CSRFToken": csrfToken,
+			"Access-Control-Request-Methods": "POST",
+			// "X-CSRFToken": csrfToken,
+			"Access-Control-Allow-Origin": "http://127.0.0.1:8000",
+			// "Access-Control-Request-Headers": "x-requested-with",
 		},
-		crossDomain : true,
+		// crossDomain : true,
 		processData: false,
 		contentType: false,
 		success: function(data) {
@@ -115,6 +118,7 @@ function uploadBlob(blob) {
 		error: function(err) {
 			console.error(err);
 		},
+		
 	});
 
 	// url = 'https://' + speech_region + '.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US&format=detailed'

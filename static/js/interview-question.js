@@ -16,7 +16,10 @@ $(document).ready(function() {
 
 function evaluate_interview_question(question, user_answer) {
 
-    url = 'https://wda-gemini-api.azurewebsites.net/interview_question';
+    // url = 'https://wda-gemini-api.azurewebsites.net/interview_question';
+    url = 'https://job-api-7kowvvrmxa-de.a.run.app/interview_question'
+
+    console.log(url)
 
     // Apply formData to send the data to the server
     var formData = new FormData();
@@ -34,6 +37,12 @@ function evaluate_interview_question(question, user_answer) {
     $.ajax({
         url: url,
         type: 'POST',
+        headers: {
+			"Access-Control-Request-Methods": "POST",
+			// "X-CSRFToken": csrfToken,
+			"Access-Control-Allow-Origin": "http://127.0.0.1:8000",
+			// "Access-Control-Request-Headers": "x-requested-with",
+		},
         data: formData,
         crossDomain: true,
         processData: false,
