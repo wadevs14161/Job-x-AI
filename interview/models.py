@@ -8,3 +8,15 @@ class interview_question(models.Model):
 
     def __str__(self):
         return self.question_competency
+    
+class interview_q_software_engineering(models.Model):
+    question = models.TextField()
+    answer = models.TextField()
+
+class interview_q_ux_designer(models.Model):
+    question = models.TextField()
+
+class interview_q_ui_designer(models.Model):
+    question = models.TextField()
+    sample_answer = models.TextField()
+
