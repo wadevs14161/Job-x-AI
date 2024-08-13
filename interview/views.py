@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from .forms import UploadVideoForm
-import requests, json
+from django.shortcuts import render, redirect
+from .forms import UploadVideoForm, MockInterviewEntryForm
+from .models import *
+import requests, json, random
 
 # Create your views here.
 def analysis(request):
@@ -103,23 +104,43 @@ def analysis(request):
     }
     return render(request, 'analysis.html', context)
 
+def mock_interview_entry(request):
+    if request.method == 'POST':
+        # Get job type
+        job = request.POST.get("job")
 
-def interview(request):
-    from .models import interview_question
+        # return render(request, 'mock-interview.html', context)
+        return redirect(mock_interview, job=job)
 
-    questions = interview_question.objects.all()
+    form = MockInterviewEntryForm()
 
-    # Get one question from questions randomly
-    import random
-    question_set = random.choice(questions)
-    question = question_set.question
-    question_zh = question_set.question_zh
+    context = {
+        'form': form
+    }
 
-    print(question)
-    print(question_zh)
+    return render(request, 'interview.html', context=context)
+
+def mock_interview(request, job):
+
+    questions = ''
+    # Query question sets
+    if job == "General":
+        questions = interview_question.objects.values_list('question', flat=True)
+    elif job == "Software Engineer":
+        questions = interview_q_software_engineering.objects.values_list('question', flat=True)
+    elif job == "UI Designer":
+        questions = interview_q_ui_designer.objects.values_list('question', flat=True)
+    elif job == "UX Designer":
+        questions = interview_q_ux_designer.objects.values_list('question', flat=True)
+    
+    question = random.choice(questions)
+
+    context = {
+        'question': question
+    }
 
     context = {
         'question': question,
-        'question_zh': question_zh,
+        # 'question_zh': question_zh,
     }
-    return render(request, 'interview.html', context)
+    return render(request, 'mock-interview.html', context)

@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block javascript %}
+<script src="{% static 'js/tts.js' %}"></script>
+<script src="{% static 'js/voice-record.js' %}"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<script>
+$(document).ready(function() {
+    $("#mic-icon").click(function() {
+        $(this).toggleClass('active');
+    });
+});
+</script>
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block title %}<title>Mock Interview</title>{% endblock %}
+
+{% block content %}
+<div class='container'>
+    <div class='row'>
+        <div class='col'>
+            <div class='row mock-interviewr'>
+                <div class="row">
+                    <img id="interviewer" src="/static/images/irasutoya-interviewer.png" alt="interview-scene">
+                </div>
+            </div>
+            <div class="row" id="audio-area">
+                <div class="row" style="align-items: center;">
+                    <div class="row mic-area">
+                        <button type="button" class="mic" id="mic-icon">
+                            <i class="fa fa-microphone"></i>
+                        </button>
+                        <script>
+                            var clicked = 0;
+                            $('#mic-icon').click(function() {
+                                clicked++;
+                                
+                                if (clicked % 2 == 0) {
+                                    // Replace the text in div with class 'loading' with 'Analyzing...'
+                                    var div_loading = document.getElementsByClassName('loading');
+                                    div_loading[0].innerHTML = 'Analyzing...';
+                                } else {
+                                    var div = document.createElement('div');
+                                    div.className = 'row loading';
+                                    div.innerHTML = 'Recording...';
+                                    // Add to the bottom of the div with id 'audio-area'
+                                    document.getElementById('audio-area').appendChild(div);
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+                <div class="row">
+                    <audio class="playback" controls></audio>
+                </div>
+                
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <a id="play_question">
+                    <div>
+                        <span class="material-icons">play_arrow</span>
+                        <span style="color:slategrey">Tap to play</span>
+                        <div id="question">{{ question }}</div>
+                    </div>
+                </a>
+                {% comment %}
+                <div id="accordion">
+                    <a href="#collapseOne" class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        翻譯 (中文)
+                    </a>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            {{ question_zh }}
+                        </div>
+                    </div>
+                </div>
+                {% endcomment %}
+            </div>
+        </div>
+        <div class='col'>
+            <div class="row" id="interview_question_header">
+                <h3 style="margin: 30px;">Analysis will be displayed here</h3>
+                <div class="row">
+                    <img src="/static/images/html-skeleton-division.png" alt="skeleton" style="height: 500px;">
+                </div>
+            </div>
+            <div class='row' id="user-answer" style="visibility: hidden;">
+                    
+            </div>
+            <div id="interview_question_result" class='row' style="visibility: hidden;">
+                <div class="ai-response" id="interview_question_score" style="visibility: hidden;">
+                    
+                </div>
+                <div class="ai-response" id="interview_question_evaluation" style="visibility: hidden;">
+                
+                </div>
+                <div class="ai-response" id="interview_question_suggestion" style="visibility: hidden;">
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
