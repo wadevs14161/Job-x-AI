@@ -18,7 +18,6 @@ $(document).ready(function() {
 });
 
 function welcomeMessage() {
-    // Welcome message "你好，請問需要什麼協助？"in chatbox
     var welcomeMessage = document.createElement("li");
     welcomeMessage.classList.add("chat");
     welcomeMessage.classList.add("incoming");
@@ -26,7 +25,7 @@ function welcomeMessage() {
     spanElement.classList.add("material-symbols-outlined");
     spanElement.textContent = "robot_2";
     var pElement = document.createElement("p");
-    pElement.textContent = "你好! 請問需要什麼協助?";
+    pElement.textContent = "Hello, what can I help you with?";
 
     welcomeMessage.appendChild(spanElement);
     welcomeMessage.appendChild(pElement);

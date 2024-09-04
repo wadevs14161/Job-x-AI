@@ -3,6 +3,8 @@ from .forms import plans_filter_form
 from employee.models import Employee, employee_current, employee_identity
 from plan.models import plan_employee, plan_employee_details
 
+def mock_conversation(request):
+    return render(request, 'mock-conversation.html')
 
 def benefit(request):
     if request.method == 'POST':

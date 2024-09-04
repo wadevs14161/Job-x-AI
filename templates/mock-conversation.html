@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block javascript %}
+<script src="{% static 'js/chatbot.js' %}"></script>
+<script>
+</script>
+
+{% endblock %}
+
+{% block title %}<title>Conversation</title>{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <ul class="nav nav-pills" id="pills-tab" role="tablist">
+            <span style="margin-right: 10px; padding: 5px; font-size:x-large; color: #696969; font-weight:bolder;">SITUATION:</span>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="find_welfare" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Free talk</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="find_courses" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Cafe</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="find_jobs" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Office</button>
+            </li>
+        </ul>
+    </div>
+    <div class="row" style="height: 550px; border-radius: 0 0 10px 10px;">
+        <div class="col-md-6 left">
+            <div class="chatbot">        
+                <ul class="chatbox">
+                    <li class="chat incoming">
+                    </li>
+                </ul>
+                <div class="chat-input">
+                    <textarea placeholder="請輸入訊息..." required></textarea>
+                    <span id="send-btn" class="material-symbols-outlined" >send</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 right" id="ai-response-area">
+        </div>
+    </div>
+</div>
+{% endblock %}
