@@ -7,7 +7,7 @@ import pandas as pd
 print("Import done")
 
 # Read csv file into a pandas dataframe
-df = pd.read_csv('static/data/interview_questions_answers_user_experience_design.csv')
+df = pd.read_csv('static/data/interview_questions_general.csv')
 
 # Iterate through the dataframe,
 # assign text in the "Question" column to the question field of the interview_question model
